@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Midterm Grade Calculator</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 60px 20px;
+    background: #faf6f4;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #4a3f3d;
+    display: flex;
+    justify-content: center;
+  }
+  .card {
+    width: 100%;
+    max-width: 420px;
+    background: #fffdfc;
+    padding: 40px 36px;
+    border: 1px solid #eadfda;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b0616f;
+    margin: 0 0 4px;
+  }
+  .sub {
+    font-size: 12px;
+    color: #a89a95;
+    margin-bottom: 28px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    margin: 14px 0 6px;
+    color: #6b5b57;
+  }
+  input {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #e2d2cd;
+    background: transparent;
+    font-size: 14px;
+    color: #4a3f3d;
+    outline: none;
+  }
+  input:focus {
+    border-bottom: 1px solid #b0616f;
+  }
+  .row {
+    display: flex;
+    gap: 14px;
+  }
+  .row > div {
+    flex: 1;
+  }
+  .carried {
+    background: #faf1ee;
+    padding: 12px 14px;
+    margin-top: 22px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .carried input {
+    width: 70px;
+    text-align: right;
+    border-bottom: 1px solid #e2d2cd;
+  }
+  button {
+    margin-top: 26px;
+    width: 100%;
+    padding: 11px;
+    background: #b0616f;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #98505d;
+  }
+  .result {
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid #eadfda;
+    text-align: center;
+    display: none;
+  }
+  .result span {
+    display: block;
+    font-size: 12px;
+    color: #a89a95;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .result strong {
+    font-size: 32px;
+    color: #b0616f;
+    font-weight: 600;
+  }
+  .next {
+    display: none;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 12px;
+  }
+  .next a {
+    color: #b0616f;
+    text-decoration: none;
+    border-bottom: 1px solid #b0616f;
+  }
+  .back {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #a89a95;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Midterm</h1>
+  <div class="sub">grade computation</div>
+
+  <label>Quizzes</label>
+  <div class="row">
+    <div><input type="number" id="q1" placeholder="Quiz 1"></div>
+    <div><input type="number" id="q2" placeholder="Quiz 2"></div>
+    <div><input type="number" id="q3" placeholder="Quiz 3"></div>
+  </div>
+
+  <label>Laboratory Activities</label>
+  <div class="row">
+    <div><input type="number" id="l1" placeholder="Lab 1"></div>
+    <div><input type="number" id="l2" placeholder="Lab 2"></div>
+    <div><input type="number" id="l3" placeholder="Lab 3"></div>
+  </div>
+
+  <label>Assignments</label>
+  <div class="row">
+    <div><input type="number" id="a1" placeholder="Assignment 1"></div>
+    <div><input type="number" id="a2" placeholder="Assignment 2"></div>
+  </div>
+
+  <label>Midterm Exam</label>
+  <input type="number" id="me" placeholder="Score">
+
+  <div class="carried">
+    Prelim Grade
+    <input type="number" id="pg" placeholder="0">
+  </div>
+
+  <button onclick="computeMidterm()">Compute</button>
+
+  <div class="result" id="result">
+    <span>Midterm Grade</span>
+    <strong id="mgValue">0</strong>
+  </div>
+
+  <div class="next" id="next">
+    saved — continue to <a href="final.html">final</a>
+  </div>
+
+  <a class="back" href="prelim.html">&larr; back to prelim</a>
+</div>
+
+<script>
+
+window.onload = function () {
+  const saved = localStorage.getItem("prelimGrade");
+  if (saved) document.getElementById("pg").value = saved;
+};
+
+function computeMidterm() {
+  const q = (num("q1") + num("q2") + num("q3")) / 3;
+  const l = (num("l1") + num("l2") + num("l3")) / 3;
+  const a = (num("a1") + num("a2")) / 2;
+  const me = num("me");
+  const pg = num("pg");
+
+  const cs = (q * 0.6) + (a * 0.2) + (l * 0.2);
+  const tmg = (cs * 0.5) + (me * 0.5);
+  const mg = ((1 / 3) * pg) + ((2 / 3) * tmg);
+
+  document.getElementById("mgValue").textContent = mg.toFixed(1);
+  document.getElementById("result").style.display = "block";
+  document.getElementById("next").style.display = "block";
+
+  localStorage.setItem("midtermGrade", mg.toFixed(2));
+}
+
+function num(id) {
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? 0 : v;
+}
+</script>
+</body>
+</html>

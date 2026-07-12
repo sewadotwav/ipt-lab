@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Number Guessing Game</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: white;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    width: 100%;
+    max-width: 380px;
+    background: #0f3a1a;
+    padding: 40px 34px;;
+  }
+  h1 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    margin: 0 0 6px;
+  }
+  .sub {
+    font-size: 12px;
+    color: #9dc5bb;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+  .sub b {
+    color: #dee5e5;
+  }
+  .row {
+    display: flex;
+    gap: 10px;
+  }
+  input {
+    flex: 1;
+    padding: 10px 12px;
+    background: white;
+    border: 1px solid #1c4d2c;
+    color: #082d0f;
+    font-size: 14px;
+    outline: none;
+  }
+  input:focus {
+    border-color: #17b890;
+  }
+  button {
+    padding: 10px 18px;
+    background: #17b890;
+    color: #082d0f;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #13a17d;
+  }
+  button:disabled {
+    background: #1c4d2c;
+    color: #5e807f;
+    cursor: not-allowed;
+  }
+  .feedback {
+    margin-top: 22px;
+    font-size: 13px;
+    color: #dee5e5;
+    min-height: 18px;
+  }
+  .feedback.correct {
+    color: #17b890;
+    font-weight: 600;
+  }
+  .feedback.over {
+    color: #c96a5a;
+    font-weight: 600;
+  }
+  .meta {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #5e807f;
+    letter-spacing: 0.5px;
+  }
+  .replay {
+    display: none;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #1c4d2c;
+  }
+  .replay button {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #17b890;
+    color: #17b890;
+  }
+  .replay button:hover {
+    background: #17b890;
+    color: #082d0f;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Guess the Number</h1>
+  <div class="sub">Pick a number between <b>1</b> and <b>100</b>. You have <b id="attemptsLimit">10</b> attempts.</div>
+
+  <div class="row">
+    <input type="number" id="guessInput" min="1" max="100" placeholder="Enter a number">
+    <button id="submitBtn" onclick="submitGuess()">Submit</button>
+  </div>
+
+  <div class="feedback" id="feedback"></div>
+  <div class="meta" id="meta"></div>
+
+  <div class="replay" id="replay">
+    <button onclick="resetGame()">Play Again</button>
+  </div>
+</div>
+
+<script>
+var secretNumber;
+var maxAttempts = 10;
+var attempts;
+var gameOver;
+
+function generateSecretNumber() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+
+function guessNumber(guess) {
+  if (guess === secretNumber) {
+    return "correct";
+  } else if (guess > secretNumber) {
+    return "Too high. Try a lower number.";
+  } else {
+    return "Too low. Try a higher number.";
+  }
+}
+
+function initGame() {
+  secretNumber = generateSecretNumber();
+  attempts = 0;
+  gameOver = false;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("meta").textContent = "";
+  document.getElementById("replay").style.display = "none";
+  document.getElementById("submitBtn").disabled = false;
+  document.getElementById("guessInput").disabled = false;
+  document.getElementById("guessInput").value = "";
+  document.getElementById("guessInput").focus();
+}
+
+function submitGuess() {
+  if (gameOver) return;
+
+  var input = document.getElementById("guessInput");
+  var guess = parseInt(input.value);
+  var feedback = document.getElementById("feedback");
+  var meta = document.getElementById("meta");
+
+  if (isNaN(guess) || guess < 1 || guess > 100) {
+    feedback.textContent = "Enter a valid number between 1 and 100.";
+    feedback.className = "feedback";
+    return;
+  }
+
+  attempts++;
+  var result = guessNumber(guess);
+
+  if (result === "correct") {
+    feedback.textContent = "Correct. You guessed the number in " + attempts + " attempt" + (attempts === 1 ? "" : "s") + ".";
+    feedback.className = "feedback correct";
+    meta.textContent = "";
+    endGame();
+    return;
+  }
+
+  feedback.textContent = result;
+  feedback.className = "feedback";
+  meta.textContent = "Attempts left: " + (maxAttempts - attempts);
+
+  if (attempts >= maxAttempts) {
+    feedback.textContent = "Game over. You've used all your attempts. The number was " + secretNumber + ".";
+    feedback.className = "feedback over";
+    meta.textContent = "";
+    endGame();
+    return;
+  }
+
+  input.value = "";
+  input.focus();
+}
+
+function endGame() {
+  gameOver = true;
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("guessInput").disabled = true;
+  document.getElementById("replay").style.display = "block";
+}
+
+function resetGame() {
+  initGame();
+}
+
+document.getElementById("guessInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") submitGuess();
+});
+
+initGame();
+</script>
+</body>
+</html>
