@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Personal Information Form</h2>
+        <form id="infoForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age">
+
+            <label for="gender">Gender:</label>
+            <select id="gender">
+                <option value="">-- Select Gender --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="color">Favorite Color:</label>
+            <input type="text" id="color" placeholder="Enter your favorite color">
+
+            <button type="button" onclick="submitData()">Submit</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
