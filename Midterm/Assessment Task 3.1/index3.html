@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Character Selection</title>
+</head>
+<body>
+  <script>
+    let choiceInput = prompt(
+        "Select a character (1-5):\n" +
+        "1 - Warrior\n" +
+        "2 - Mage\n" +
+        "3 - Archer\n" +
+        "4 - Assassin\n" +
+        "5 - Healer"
+    );
+
+    let choice = parseInt(choiceInput);
+    let characterName = "";
+    let description = "";
+    let isValid = true; 
+
+    switch (choice) {
+        case 1:
+            characterName = "Warrior";
+            description = "Strong in close-range combat.";
+            break;
+        case 2: 
+            characterName = "Mage";
+            description = "Casts powerful magic spells.";
+            break;
+        case 3: 
+            characterName = "Archer";
+            description = "Skilled in long-range attacks.";
+            break;
+        case 4: 
+            characterName = "Assassin";
+            description = "Fast and deadly in stealth attacks.";
+            break;
+        case 5: 
+            characterName = "Healer";
+            description = "Restores health to allies.";
+            break;
+        default: 
+            isValid = false;
+            alert("Invalid character selection.");
+            break;
+    }
+
+    if (isValid) {
+        alert("Character: " + characterName + "\nDescription: " + description);
+    }
+  </script>
+</body>
+</html>

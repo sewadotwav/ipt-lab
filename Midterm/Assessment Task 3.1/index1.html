@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Grade Evaluator</title>
+</head>
+<body>
+  <script>
+    let gradeInput = prompt("Enter your grade here to evaluate: ");
+    let grade = parseFloat(gradeInput);
+    let remark = "";
+
+    if (grade < 0 || grade > 100) {
+        remark = "Invalid Grade";
+    }
+    else if (grade >= 90) {
+        remark = "Excellent";
+    }
+    else if (grade >= 85) {
+        remark = "Very Good"
+    }
+    else if (grade >= 80) {
+        remark = "Good"
+    }
+    else if (grade >= 75) {
+        remark = "Passed"
+    }
+    else if (grade < 75 ) {
+        remark = "Failed"
+    }
+
+    alert("Your Grade: " + grade + " " + "Remark: " + remark);
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Discount Calculator</title>
+</head>
+<body>
+  <script>
+let amountInput = prompt("Enter the amount: ");
+let originalAmount = parseFloat(amountInput);
+let discountRate = 0;
+
+if (originalAmount >= 5000) {
+    discountRate = 0.20;
+}
+else if (originalAmount >= 3000) {
+    discountRate = 0.15;
+}
+else if (originalAmount >= 1500) {
+    discountRate = 0.10;
+}
+else if (originalAmount < 1500) {
+    discountRate = 0;
+}
+
+let discountAmount = originalAmount * discountRate;
+let finalAmount = originalAmount - discountAmount;
+
+alert(
+"\nOriginal Amount: ₱" + originalAmount.toFixed(2) +
+"\nDiscount Rate: " + (discountRate * 100) + "%" +
+"\nDiscount Amount: ₱" + discountAmount.toFixed(2) +
+"\nFinal Amount: ₱" + finalAmount.toFixed(2)
+);
+  </script>
+</body>
+</html>
