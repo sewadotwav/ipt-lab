@@ -1,44 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-<meta charset="UTF-8">
 <title>Day Checker</title>
-<style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: #36558f; 
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: #ffffff;
-  }
-  h1 {
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  button {
-    padding: 12px 20px;
-    background: #2c4675;
-    color: #ffffff;
-    border: none;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #1f3354;
-  }
 </style>
 </head>
 <body>
-  <h1>Day Checker</h1>
-  <button onclick="checkDay()">Enter Number</button>
-
 <script>
 function checkDay() {
   var num = prompt("Enter a number:");
@@ -87,13 +52,14 @@ function showLovePattern() {
 function openMemberWindow() {
   var myWindow = window.open("", "", "width=500, height=500");
   myWindow.document.write("<table border='1' width='100%' height='100%'>");
-  myWindow.document.write("<tr><td><img src='member1.jpg' width='100%' height='100%'></td><td><img src='member2.jpg' width='100%' height='100%'></td></tr>");
-  myWindow.document.write("<tr><td><img src='member3.jpg' width='100%' height='100%'></td><td><img src='member4.jpg' width='100%' height='100%'></td></tr>");
-  myWindow.document.write("<tr><td colspan='2'><img src='member5.jpg' width='100%' height='100%'></td></tr>");
+  myWindow.document.write("<tr><td><img src='1000056588.jpeg' width='100%' height='100%'></td><td><img src='seanpic.jpg' width='100%' height='100%'></td></tr>");
+  myWindow.document.write("<tr><td><img src='ayeshapic.jpg' width='100%' height='100%'></td><td><img src='exeveapic.png' width='100%' height='100%'></td></tr>");
+  myWindow.document.write("<tr><td colspan='2'><img src='jmpic.jpg' width='100%' height='100%'></td></tr>");
   myWindow.document.write("</table>");
   myWindow.blur();
 }
 
+checkDay();
 </script>
 </body>
 </html>
