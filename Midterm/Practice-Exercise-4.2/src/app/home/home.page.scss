@@ -1,0 +1,98 @@
+:host {
+  --wine: #5a0f16;
+  --pale: #e7efdb;
+}
+
+ion-content.wine-bg {
+  --background: var(--wine);
+}
+
+.screen {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 34px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--pale);
+  font-family: 'Encode Sans Expanded', sans-serif;
+}
+
+.title-block {
+  line-height: 0.92;
+
+  .line-my {
+    display: block;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .line-favorite {
+    display: block;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    margin: 2px 0 0;
+  }
+
+  .line-song {
+    display: block;
+    text-align: right;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-top: 2px;
+  }
+}
+
+.cd-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 28px 0;
+
+  img {
+    width: 78%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.caption {
+  text-align: center;
+
+  p {
+    margin: 0 0 6px;
+    font-family: 'Encode Sans Expanded', sans-serif;
+  }
+
+  .artist {
+    font-size: 19px;
+    font-weight: 700;
+    text-transform: lowercase;
+  }
+
+  .track {
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: lowercase;
+  }
+
+  .meta {
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: lowercase;
+    opacity: 0.85;
+    letter-spacing: 0.02em;
+    margin-bottom: 0;
+  }
+}
